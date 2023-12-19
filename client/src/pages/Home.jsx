@@ -9,6 +9,7 @@ import icon3 from "../assets/images/icon03.png";
 import { NavLink, Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 import About from "../components/about/About";
+import ServiceList from "../components/services/ServiceList";
 
 const Home = () => {
   return (
@@ -159,10 +160,20 @@ const Home = () => {
       {/*==============About Section End============== */}
 
       {/*==============Service Section Start============== */}
+      <section>
+        <div className="container">
+          <div className="lg:w-[470px] mx-auto">
+            <h2 className="heading text-center">Our Medical Services</h2>
+            <p className="text_para text-center">
+              World class care for everyone. Our health system offers unmatched,
+              expert health care.
+            </p>
+          </div>
+
+		  <ServiceList/>
+        </div>
+      </section>
       {/*==============Service Section End============== */}
-
-
-
     </>
   );
 };
