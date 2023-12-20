@@ -13,6 +13,7 @@ import { NavLink, Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 import About from "../components/about/About";
 import ServiceList from "../components/services/ServiceList";
+import DoctorsList from "../components/doctors/DoctorsList";
 
 const Home = () => {
   return (
@@ -185,7 +186,7 @@ const Home = () => {
             {/*==============Feature Content============== */}
             <div className="lg:w-[670px]">
               <h2 className="heading text-left">
-                Get virtual treatment anytime.
+                Get virtual treatment <br /> anytime.
               </h2>
               <ul className="pl-8 list-decimal">
                 <li className="text_para">
@@ -231,13 +232,28 @@ const Home = () => {
                     Weyne Collins
                   </h4>
                 </div>
-
               </div>
             </div>
           </div>
         </div>
       </section>
       {/*==============Feature Section End============== */}
+
+      {/*==============Our Great Doctors Section Start============== */}
+      <section>
+        <div className="container">
+          <div className="lg:w-[470px] mx-auto">
+            <h2 className="heading text-center">Our great doctors</h2>
+            <p className="text_para text-center">
+              World class care for everyone. Our health system offers unmatched,
+              expert health care.
+            </p>
+          </div>
+
+          <DoctorsList />
+        </div>
+      </section>
+      {/*==============Our Great Doctors Section End============== */}
     </>
   );
 };
