@@ -16,6 +16,7 @@ import About from "../components/about/About";
 import ServiceList from "../components/services/ServiceList";
 import DoctorsList from "../components/doctors/DoctorsList";
 import FaqList from "../components/faq/FaqList";
+import Testimonial from "../components/testimonial/Testimonial";
 
 const Home = () => {
   return (
@@ -262,7 +263,7 @@ const Home = () => {
       {/*==============FAQ Section Start============== */}
       <section>
         <div className="container">
-          <div className="flex justify-between gap-[50px] lg:gap-0">
+          <div className="flex justify-between items-center gap-[50px] lg:gap-0">
             <div className="w-1/2 hidden md:block">
               <img src={faqImg} alt="" />
             </div>
@@ -274,6 +275,22 @@ const Home = () => {
         </div>
       </section>
       {/*==============FAQ Section End============== */}
+
+      {/*==============Testimonial Section Start============== */}
+      <section>
+        <div className="container">
+          <div className="lg:w-[470px] mx-auto">
+            <h2 className="heading text-center">What out patients say</h2>
+            <p className="text_para text-center">
+              World class care for everyone. Our health system offers unmatched,
+              expert health care.
+            </p>
+          </div>
+
+          <Testimonial/>
+        </div>
+      </section>
+      {/*==============Testimonial Section End============== */}
     </>
   );
 };
