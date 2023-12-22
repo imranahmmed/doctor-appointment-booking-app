@@ -30,7 +30,7 @@ const Login = () => {
               Please Sign In to your account.
             </p>
 
-            <form action="" className="py-4 md:py-0">
+            <form action="#" className="py-4 md:py-0">
               <div className="mb-5">
                 <input
                   type="email"

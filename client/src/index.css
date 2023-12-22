@@ -26,10 +26,18 @@
   }
 
   .header {
-    @apply bg-[url('./assets/images/mask.png')] bg-no-repeat bg-cover bg-center w-full py-[20px] flex items-center
+    @apply bg-[url('./assets/images/mask.png')] bg-no-repeat bg-cover bg-center w-full py-[20px] flex items-center;
   }
-  .hero_section{
-    @apply bg-[url('./assets/images/hero-bg.png')] bg-no-repeat bg-cover
+  .hero_section {
+    @apply bg-[url('./assets/images/hero-bg.png')] bg-no-repeat bg-cover;
+  }
+
+  .form_label {
+    @apply text-textColor font-semibold text-[16px] leading-7 mb-2;
+  }
+
+  .form_input {
+    @apply w-full px-4 py-3 border border-solid border-[#0066ff34] focus:outline-none focus:border-primaryColor text-[16px] leading-7 text-headingColor placeholder:text-[#031b4e81] rounded-md;
   }
 }
 
