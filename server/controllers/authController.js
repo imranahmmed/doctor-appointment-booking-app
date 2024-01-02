@@ -7,6 +7,13 @@ import pck from "number-generator";
 import nodemailer from "nodemailer";
 import { otpTemplate } from "../utils/emailTemplate.js";
 
+const generateToken = (user) => {
+    const { _id, role } = user
+    return jwt.sign({ id: _id, role: role }, process.env.JWT_SECRET_KEY, {
+        expiresIn: "15d"
+    })
+}
+
 export const registrationController = async (req, res) => {
     const { fullName, email, password, role, gender, photo } = req.body
     let duplicateEmail = null
@@ -15,7 +22,7 @@ export const registrationController = async (req, res) => {
             return res.status(400).json({ message: "Enter fullname" })
         } else if (!email) {
             return res.status(400).json({ message: "Enter email" })
-        } else if (!emailValidation) {
+        } else if (!emailValidation(email)) {
             return res.status(400).json({ message: "Enter valid email" })
         } else if (!password) {
             return res.status(400).json({ message: "Enter password" })
@@ -30,6 +37,9 @@ export const registrationController = async (req, res) => {
             } else if (role === "doctor") {
                 duplicateEmail = await Doctor.find({ email: email })
             }
+
+            // duplicateEmail = await Doctor.find({ email: email })
+            // duplicateEmail = await User.find({ email: email })
 
             if (duplicateEmail.length > 0) {
                 return res.status(403).json({ message: "User already exists. Please, Try another email" })
@@ -54,7 +64,6 @@ export const registrationController = async (req, res) => {
                     })
                     await doctor.save()
                 }
-
 
                 // Email send
                 const transporter = nodemailer.createTransport({
@@ -81,10 +90,41 @@ export const registrationController = async (req, res) => {
     }
 }
 
-export const loginController = async () => {
+export const loginController = async (req, res) => {
+    const { email } = req.body;
     try {
-        console.log("Login")
-    } catch (error) {
+        let user = null;
+        const doctor = await Doctor.find({ email });
+        const patient = await User.find({ email });
 
+        if (doctor.length > 0) {
+            user = doctor[0]; // Assuming email is unique, use the first user
+        }
+        if (patient.length > 0) {
+            user = patient[0]; // Assuming email is unique, use the first user
+        }
+
+
+        // check if user exists or not
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // if user exists, compare the provided password with the stored password
+        const isPassMatched = await bcrypt.compare(req.body.password, user.password);
+
+        if (!isPassMatched) {
+            return res.status(400).json({ message: "Password mismatch" });
+        }
+
+        const token = generateToken(user);
+        console.log(user, token);
+
+        const { password, role, appointments, ...rest } = user._doc;
+        return res.status(200).json({ message: "Successfully Login", token, user: { ...rest }, role });
+
+    } catch (error) {
+        console.error("Login Error:", error);
+        return res.status(500).json({ message: "Failed to login" });
     }
-}
+};
