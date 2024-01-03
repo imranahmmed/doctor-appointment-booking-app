@@ -52,12 +52,24 @@ export const getSingleDoctorController = async (req, res) => {
 }
 
 export const getAllDoctorController = async (req, res) => {
+    const { query } = req.query
+    let doctors
     try {
-        const getAllDoctors = await Doctor.find({}).select(["-password"])
-        if (getAllDoctors.length > 0) {
-            return res.status(200).json({ success: "Ok", message: "Doctors found", data: getAllDoctors })
+        if (query) {
+            doctors = await Doctor.find({
+                isApproved: "approved",
+                $or: [
+                    { fullname: { $regex: query, $options: "i" } },
+                    { specialization: { $regex: query, $options: "i" } },
+                ]
+            }).select(["-password"])
         } else {
-            return res.status(404).json({ message: "No Doctor found" })
+            const getAllDoctors = await Doctor.find({ isApproved: "approved" }).select(["-password"])
+            if (getAllDoctors.length > 0) {
+                return res.status(200).json({ success: "Ok", message: "Doctors found", data: getAllDoctors })
+            } else {
+                return res.status(404).json({ message: "No approved doctor found" })
+            }
         }
     } catch (error) {
         return res.status(404).json({ message: "No Doctor found" })
