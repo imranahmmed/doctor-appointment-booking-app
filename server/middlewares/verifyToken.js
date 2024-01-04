@@ -12,7 +12,7 @@ export const authenticate = async (req, res, next) => {
         const token = authToken.split(" ")[1]
         const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
         req.userId = decoded.id
-        req.role = decoded.role
+        // req.role = decoded.role
         next()
     } catch (error) {
         if (error.name === "TokenExpiredError") {
@@ -23,10 +23,6 @@ export const authenticate = async (req, res, next) => {
 }
 
 export const restrict = roles => async (req, res, next) => {
-    console.log(req.userId)
-    console.log(req.role)
-
-
     const userId = req.userId
     let user
     const patient = await User.findById(userId)

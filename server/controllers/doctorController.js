@@ -40,7 +40,7 @@ export const deleteDoctorController = async (req, res) => {
 export const getSingleDoctorController = async (req, res) => {
     const id = req.params.id
     try {
-        const getSingleDoctor = await Doctor.find({ _id: id }).select(["-password"])
+        const getSingleDoctor = await Doctor.find({ _id: id }).populate("reviews").select(["-password"])
         if (getSingleDoctor.length > 0) {
             return res.status(200).json({ success: "Ok", message: "Doctor found", data: getSingleDoctor })
         } else {
@@ -62,9 +62,9 @@ export const getAllDoctorController = async (req, res) => {
                     { fullname: { $regex: query, $options: "i" } },
                     { specialization: { $regex: query, $options: "i" } },
                 ]
-            }).select(["-password"])
+            }).populate("reviews").select(["-password"])
         } else {
-            const getAllDoctors = await Doctor.find({ isApproved: "approved" }).select(["-password"])
+            const getAllDoctors = await Doctor.find({ isApproved: "approved" }).populate("reviews").select(["-password"])
             if (getAllDoctors.length > 0) {
                 return res.status(200).json({ success: "Ok", message: "Doctors found", data: getAllDoctors })
             } else {
