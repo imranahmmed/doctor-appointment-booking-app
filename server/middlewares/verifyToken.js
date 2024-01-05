@@ -29,9 +29,13 @@ export const restrict = roles => async (req, res, next) => {
     const doctor = await Doctor.findById(userId)
     if (patient) {
         user = patient
+    } else {
+        return res.status(400).json({ message: "User not found" })
     }
     if (doctor) {
         user = doctor
+    } else {
+        return res.status(400).json({ message: "User not found" })
     }
 
     if (!roles.includes(user.role)) {

@@ -14,11 +14,11 @@ const Login = () => {
 
   return (
     <>
-      <section className="bg-[#0066ff15]">
+      {/* <section className="bg-[#0066ff15]">
         <div className="container text-center">
           <h2 className="heading">Login</h2>
         </div>
-      </section>
+      </section> */}
 
       <section>
         <div className="container">
