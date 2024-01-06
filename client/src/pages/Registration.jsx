@@ -4,22 +4,19 @@ import avatar from "../assets/images/avatar-icon.png";
 import uploadCloudinary from "../utils/uploadCloudinary";
 import { BASE_URL } from "../config";
 import { toast } from "react-toastify";
-import HashLoader from "react-spinners/HashLoader"
+import HashLoader from "react-spinners/HashLoader";
 const Registration = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState("");
   const [loading, setLoading] = useState(false);
-
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
     password: "",
-    avatar: "",
     gender: "",
     role: "",
     photo: selectedFile,
   });
-
   const navigate = useNavigate();
 
   const handleRegistrationFormChange = (e) => {
@@ -33,7 +30,6 @@ const Registration = () => {
     setPreviewUrl(data.url);
     setSelectedFile(data.url);
     setFormData({ ...formData, photo: data.url });
-    console.log(data);
   };
 
   const submitHandler = async (e) => {
@@ -53,7 +49,6 @@ const Registration = () => {
       if (!response.ok) {
         throw new Error(message);
       }
-
       setLoading(false);
       toast.success(message);
       navigate("/login");
@@ -181,17 +176,21 @@ const Registration = () => {
                 type="submit"
                 className="btn w-full rounded-md mt-3 py-3"
               >
-                {loading ? <HashLoader size={20} color="#ffffff"/> : "Register"}
+                {loading ? (
+                  <HashLoader size={20} color="#ffffff" />
+                ) : (
+                  "Register"
+                )}
               </button>
 
               <p className="mt-5 text-textColor">
-                Already have an account?{" "}
+                Already have an account?
                 <Link
                   to="/login"
                   className="text-primaryColor font-medium ml-1"
                 >
                   Login
-                </Link>{" "}
+                </Link>
               </p>
             </form>
           </div>

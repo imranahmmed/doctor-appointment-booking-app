@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import logo from "../../assets/images/logo.png";
 import userAvatar from "../../assets/images/avatar-icon.png";
 import { NavLink, Link } from "react-router-dom";
 import { BiMenu } from "react-icons/bi";
-
+import { authContext } from "../../context/AuthContext";
 const navLinks = [
   {
     path: "/",
@@ -26,7 +26,7 @@ const navLinks = [
 const Header = () => {
   const headerRef = useRef(null);
   const menuRef = useRef(null);
-
+  const { user, role, token } = useContext(authContext);
   const handleStickyHeader = () => {
     window.addEventListener("scroll", () => {
       if (
@@ -77,23 +77,38 @@ const Header = () => {
           {/*==============Action============== */}
 
           <div className="flex items-center gap-4">
-            <div className="hidden">
-              <Link to="/">
-                <figure className="w-[35px h-[35px rounded-full cursor-pointer">
-                  <img
-                    src={userAvatar}
-                    alt="User Avatar"
-                    className="w-full rounded-full"
-                  />
-                </figure>
+            {token && user ? (
+              <div>
+                <Link
+                  to={`${
+                    role === "doctor"
+                      ? "/doctors/profile/me"
+                      : "/users/profile/me"
+                  }`}
+                  className="flex gap-3 items-center"
+                >
+                  <figure className="w-[35px] h-[35px] rounded-full cursor-pointer">
+                    <img
+                      src={user?.photo}
+                      alt="User Avatar"
+                      className="w-full rounded-full"
+                    />
+                  </figure>
+                  <div>
+                    <h2 className="text-bold text-lg text-headingColor">{user?.fullName}</h2>
+                    <p className="para capitalize text-normal text-sm text-gray-500">
+                      {role}
+                    </p>
+                  </div>
+                </Link>
+              </div>
+            ) : (
+              <Link to="/login">
+                <button className="bg-primaryColor py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[50px] border border-primaryColor hover:bg-transparent hover:text-primaryColor transition-all duration-300">
+                  Login
+                </button>
               </Link>
-            </div>
-
-            <Link to="/login">
-              <button className="bg-primaryColor py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[50px] border border-primaryColor hover:bg-transparent hover:text-primaryColor transition-all duration-300">
-                Login
-              </button>
-            </Link>
+            )}
 
             <span className="md:hidden" onClick={toggleMenu}>
               <BiMenu className="w-6 h-6 cursor-pointer" />

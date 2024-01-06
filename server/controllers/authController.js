@@ -121,7 +121,7 @@ export const loginController = async (req, res) => {
         console.log(user, token);
 
         const { password, role, appointments, ...rest } = user._doc;
-        return res.status(200).json({ message: "Successfully Login", token, user: { ...rest }, role });
+        return res.status(200).json({ message: "Successfully Login", token, data: { ...rest }, role });
 
     } catch (error) {
         console.error("Login Error:", error);
