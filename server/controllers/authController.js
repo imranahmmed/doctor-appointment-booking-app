@@ -118,13 +118,11 @@ export const loginController = async (req, res) => {
         }
 
         const token = generateToken(user);
-        console.log(user, token);
 
         const { password, role, appointments, ...rest } = user._doc;
         return res.status(200).json({ message: "Successfully Login", token, data: { ...rest }, role });
 
     } catch (error) {
-        console.error("Login Error:", error);
         return res.status(500).json({ message: "Failed to login" });
     }
 };

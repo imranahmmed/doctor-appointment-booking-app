@@ -7,9 +7,9 @@ export const updateUserController = async (req, res) => {
         const searchUser = await User.find({ _id: id })
         const searchDuplicateEmail = await User.find({ email: email })
         if (searchUser.length > 0) {
-            if(searchDuplicateEmail.length > 0){
+            if (searchDuplicateEmail.length > 0) {
                 return res.status(400).json({ message: "This email already exists" })
-            }else{
+            } else {
                 const updateUser = await User.findByIdAndUpdate({ _id: id }, { $set: req.body }, { new: true }).select(["-password"])
                 return res.status(200).json({ success: "Ok", message: "Successfully Updated the user", data: updateUser })
             }

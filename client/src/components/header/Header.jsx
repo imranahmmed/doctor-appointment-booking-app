@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useContext } from "react";
 import logo from "../../assets/images/logo.png";
-import userAvatar from "../../assets/images/avatar-icon.png";
 import { NavLink, Link } from "react-router-dom";
 import { BiMenu } from "react-icons/bi";
 import { authContext } from "../../context/AuthContext";
@@ -82,8 +81,8 @@ const Header = () => {
                 <Link
                   to={`${
                     role === "doctor"
-                      ? "/doctors/profile/me"
-                      : "/users/profile/me"
+                      ? `/doctors/profile/me`
+                      : `/users/profile/me`
                   }`}
                   className="flex gap-3 items-center"
                 >

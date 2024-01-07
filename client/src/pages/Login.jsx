@@ -1,9 +1,9 @@
-import React, { useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useContext, useEffect } from "react";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import { BASE_URL } from "../config";
 import { toast } from "react-toastify";
 import { authContext } from "../context/AuthContext.jsx";
-
+import HashLoader from "react-spinners/HashLoader";
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -12,6 +12,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { dispatch } = useContext(authContext);
+  const { token, role } = useContext(authContext);
 
   const handleLoginFormChange = (e) => {
     const { name, value } = e.target;
@@ -21,7 +22,6 @@ const Login = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
-
     try {
       const response = await fetch(`${BASE_URL}/auth/login`, {
         method: "post",
@@ -32,7 +32,7 @@ const Login = () => {
       });
 
       const result = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(result.message);
       }
@@ -55,6 +55,14 @@ const Login = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (token && role === "patient") {
+      navigate("/users/profile/me");
+    } else if (token && role === "doctor") {
+      navigate("/doctors/profile/me");
+    }
+  }, [authContext]);
 
   return (
     <>
@@ -98,8 +106,12 @@ const Login = () => {
                 />
               </div>
 
-              <button type="submit" className="btn w-full rounded-md mt-3 py-3">
-                Login
+              <button
+                type="submit"
+                disabled={loading && true}
+                className="btn w-full rounded-md mt-3 py-3"
+              >
+                {loading ? <HashLoader size={22} color="#ffffff" /> : "Login"}
               </button>
 
               <p className="mt-5 text-textColor">

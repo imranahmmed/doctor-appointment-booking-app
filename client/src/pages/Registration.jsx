@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import avatar from "../assets/images/avatar-icon.png";
 import uploadCloudinary from "../utils/uploadCloudinary";
 import { BASE_URL } from "../config";
 import { toast } from "react-toastify";
