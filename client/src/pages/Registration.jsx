@@ -24,7 +24,6 @@ const Registration = () => {
   };
   const handleFileInputChange = async (e) => {
     const file = e.target.files[0];
-    // Later we will use cloudinary
     const data = await uploadCloudinary(file);
     setPreviewUrl(data.url);
     setSelectedFile(data.url);
@@ -34,7 +33,6 @@ const Registration = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
-
     try {
       const response = await fetch(`${BASE_URL}/auth/registration`, {
         method: "post",

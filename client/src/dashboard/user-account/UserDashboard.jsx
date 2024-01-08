@@ -19,17 +19,16 @@ const UserDashboard = () => {
     error,
   } = useGetProfile(`${BASE_URL}/users/profile/me`);
 
-  console.log(userData);
   return (
     <section>
       <div className="max-w-[1170px] px-5 mx-auto">
-        {loading && <Loading />}
-        {error && <Error errorMessage={error} />}
+        {loading && !error && <Loading />}
+        {error && !loading && <Error errorMessage={error} />}
         {!loading && !error && (
           <div className="grid md:grid-cols-3 gap-10">
             <div className="pb-[50px] px-[30px] rounded-md">
               <div className="flex items-center justify-center">
-                <figure className="w-[100px] h-[100px] rounded-md shadow-lg">
+                <figure className="w-[200px] h-[200px] rounded-md shadow-lg">
                   <img
                     src={userData.photo}
                     alt=""
@@ -47,7 +46,7 @@ const UserDashboard = () => {
                 </p>
                 <p className="text-textColor text-[15px] leading-6 font-normal">
                   Blood Group :{" "}
-                  <span className="ml-2 text-headingColor font-medium">A+</span>{" "}
+                  <span className="ml-2 text-headingColor font-medium">{userData.bloodGroup}</span>{" "}
                 </p>
               </div>
 
@@ -86,7 +85,7 @@ const UserDashboard = () => {
                 </button>
               </div>
               {tab === "appointments" && <MyAppointments />}
-              {tab === "profileSetting" && <ProfileSettings />}
+              {tab === "profileSetting" && <ProfileSettings userData={userData} />}
             </div>
           </div>
         )}
