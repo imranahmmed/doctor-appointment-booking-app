@@ -1,3 +1,4 @@
+import Booking from "../models/BookingSchema.js"
 import Doctor from "../models/DoctorSchema.js"
 
 export const updateDoctorController = async (req, res) => {
@@ -73,5 +74,24 @@ export const getAllDoctorController = async (req, res) => {
         }
     } catch (error) {
         return res.status(404).json({ message: "No Doctor found" })
+    }
+}
+
+export const getDoctorProfile = async (req, res) => {
+    const doctorId = req.id
+    try {
+        const doctorData = await Doctor.findById(doctorId)
+
+        if (!doctorData) {
+            return res.status(404).json({ success: false, message: "Doctor not found" })
+        }
+
+        const { password, ...rest } = doctorData._doc
+        const appointments = await Booking.find({ doctor: doctorId })
+
+
+        return res.status(200).json({ success: true, message: "Doctor found", data: { ...rest }, appointments })
+    } catch (error) {
+        return res.status(500).json({ success: false, message: "Something went wrong" })
     }
 }
