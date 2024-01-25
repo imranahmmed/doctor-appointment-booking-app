@@ -1,24 +1,14 @@
 import React from "react";
-<<<<<<< HEAD
 import heroImg01 from "../assets/images/hero-img04.png";
 import heroImg02 from "../assets/images/doc-08.png";
 import heroImg03 from "../assets/images/doc-07.png";
-=======
-import heroImg01 from "../assets/images/hero-img01.png";
-import heroImg02 from "../assets/images/hero-img02.png";
-import heroImg03 from "../assets/images/hero-img03.png";
->>>>>>> dba6e1c556385e28dde3f9ee7bc456e5bceb5c15
 import icon1 from "../assets/images/icon01.png";
 import icon2 from "../assets/images/icon02.png";
 import icon3 from "../assets/images/icon03.png";
 import featureImg from "../assets/images/feature-img.png";
 import videoIcon from "../assets/images/video-icon.png";
 import avatarIcon from "../assets/images/avatar-icon.png";
-<<<<<<< HEAD
 import faqImg from "../assets/images/faq-img-01.png";
-=======
-import faqImg from "../assets/images/faq-img.png";
->>>>>>> dba6e1c556385e28dde3f9ee7bc456e5bceb5c15
 
 import { NavLink, Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
@@ -78,15 +68,9 @@ const Home = () => {
               <div>
                 <img src={heroImg01} alt="" />
               </div>
-<<<<<<< HEAD
               <div className="mt-[30px] w-[220px]">
                 <img src={heroImg02} alt="" className="w-full mb-[30px] rounded-xl" />
                 <img src={heroImg03} alt="" className="w-full rounded-xl" />
-=======
-              <div className="mt-[30px]">
-                <img src={heroImg02} alt="" className="w-full mb-[30px]" />
-                <img src={heroImg03} alt="" className="w-full" />
->>>>>>> dba6e1c556385e28dde3f9ee7bc456e5bceb5c15
               </div>
             </div>
           </div>
@@ -303,11 +287,7 @@ const Home = () => {
             </p>
           </div>
 
-<<<<<<< HEAD
           <Testimonial />
-=======
-          <Testimonial/>
->>>>>>> dba6e1c556385e28dde3f9ee7bc456e5bceb5c15
         </div>
       </section>
       {/*==============Testimonial Section End============== */}

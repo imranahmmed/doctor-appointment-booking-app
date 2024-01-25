@@ -50,11 +50,7 @@ const ProfileSettings = ({ userData }) => {
     e.preventDefault();
     setLoading(true);
     try {
-<<<<<<< HEAD
-      const res = await fetch(`${BASE_URL}/users/${userData._id}`, {
-=======
       const response = await fetch(`${BASE_URL}/users/${userData._id}`, {
->>>>>>> dba6e1c556385e28dde3f9ee7bc456e5bceb5c15
         method: "put",
         headers: {
           "Content-Type": "application/json",
@@ -62,18 +58,6 @@ const ProfileSettings = ({ userData }) => {
         },
         body: JSON.stringify(formData),
       });
-<<<<<<< HEAD
-      const { message, data } = await res.json();
-      if (!res.ok) {
-        throw new Error(message);
-      }
-      console.log(data)
-      const {appointments, ...rest} = data
-      localStorage.setItem("user", JSON.stringify({...rest}));
-      setLoading(false);
-      toast.success(message);
-
-=======
 
       const { message } = await response.json();
       if (!response.ok) {
@@ -82,7 +66,6 @@ const ProfileSettings = ({ userData }) => {
       setLoading(false);
       toast.success(message);
       navigate("/users/profile/me");
->>>>>>> dba6e1c556385e28dde3f9ee7bc456e5bceb5c15
     } catch (error) {
       toast.error(error.message);
       setLoading(false);
