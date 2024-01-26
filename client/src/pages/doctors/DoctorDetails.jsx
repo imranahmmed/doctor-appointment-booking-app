@@ -61,14 +61,14 @@ const DoctorDetails = () => {
               </button>
             </div>
 
-            <div className="mt-[50px]">
+            <div>
               {tab === "about" && <DoctorAbout />}
               {tab === "feedback" && <DoctorFeedback />}
             </div>
           </div>
 
           <div>
-            <DoctorSidePanel/>
+            <DoctorSidePanel />
           </div>
         </div>
       </div>

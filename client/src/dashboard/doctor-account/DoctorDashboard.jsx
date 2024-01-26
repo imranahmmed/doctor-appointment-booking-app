@@ -12,7 +12,6 @@ const DoctorDashboard = () => {
   const { data, loading, error } = useGetProfile(
     `${BASE_URL}/doctors/profile/me`
   );
-  console.log(data);
   const [tab, setTab] = useState("overview");
   const { fullName, experiences, qualifications } = data;
   return (
