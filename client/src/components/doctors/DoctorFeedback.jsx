@@ -6,7 +6,7 @@ import DoctorFeedbackForm from "./DoctorFeedbackForm";
 const DoctorFeedback = () => {
   const [showGiveFeedbackForm, setShowGiveFeedbackForm] = useState(false);
   return (
-    <div>
+    <div className="mt-[50px]">
       <div className="mb-[50px]">
         <h4 className="Text-[20px] leading-[30px] font-bold text-headingColor mb-[30px]">
           All Reviews (275)
