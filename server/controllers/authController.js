@@ -6,14 +6,7 @@ import bcrypt from "bcryptjs";
 import pck from "number-generator";
 import nodemailer from "nodemailer";
 import { otpTemplate } from "../utils/emailTemplate.js";
-
-const generateToken = (user) => {
-    const { _id, role } = user
-
-    return jwt.sign({ id: _id, role: role }, "Cm56T28ucjuW", {
-        expiresIn: "15d"
-    })
-}
+import { jwtTokenGenerate } from "../config/jwtTokenGenetate.js";
 
 export const registrationController = async (req, res) => {
     const { fullName, email, password, role, gender, photo } = req.body
@@ -115,8 +108,7 @@ export const loginController = async (req, res) => {
             return res.status(400).json({ message: "Password mismatch" });
         }
         
-        const token = generateToken(user);
-        console.log(token)
+        const token = jwtTokenGenerate(user);
 
         const { password, role, appointments, ...rest } = user._doc;
         return res.status(200).json({ message: "Successfully Login", token, data: { ...rest }, role });

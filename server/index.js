@@ -1,17 +1,19 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import express from "express";
-import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import allroutes from "./routes/api/index.js";
 import { dbConnection } from "./config/dbConnection.js";
-dotenv.config()
 const app = express()
 const corsOptions = {
     origin: true
 };
+// Access environment variables
+const mongodbUrl = process.env.MONGODB_URL;
 const baseUrl = process.env.BASE_URL;
-const port = process.env.PORT || 5000
-
+const port = process.env.PORT || 8000
+console.log(process.env.PORT)
 app.get("/", (req, res) => {
     res.send("Api is working")
 });
@@ -20,8 +22,8 @@ app.get("/", (req, res) => {
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors(corsOptions));
-app.use("/api/v1", allroutes)
-app.use("/api/v1", (req, res) => res.status(404).json({ message: "No API Found on This Route." }))
+app.use(baseUrl, allroutes)
+app.use(baseUrl, (req, res) => res.status(404).json({ message: "No API Found on This Route." }))
 // app.use('/auth', authRoutes);
 // app.use(router)
 
