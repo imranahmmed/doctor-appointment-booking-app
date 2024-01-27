@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import uploadCloudinary from "../../utils/uploadCloudinary";
-const Profile = () => {
+import { BASE_URL, token } from "../../config";
+import { toast } from "react-toastify";
+const Profile = ({ doctorData }) => {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -20,6 +22,26 @@ const Profile = () => {
     about: "",
     photo: null,
   });
+
+  useEffect(() => {
+    setFormData({
+      fullName: doctorData.fullName,
+      email: doctorData.email,
+      phone: doctorData.phone,
+      bio: doctorData.bio,
+      gender: doctorData.gender,
+      specialization: doctorData.specialization,
+      ticketPrice: doctorData.ticketPrice,
+      nid: doctorData.nid,
+      bmdcRegNumber: doctorData.bmdcRegNumber,
+      qualifications: doctorData?.qualifications,
+      experiences: doctorData?.experiences,
+      timeSlots: doctorData?.timeSlots,
+      about: doctorData.about,
+      photo: doctorData.photo,
+    });
+  }, []);
+
   const handleUpdateFormInputchange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -30,8 +52,60 @@ const Profile = () => {
     const uploadedFile = await uploadCloudinary(file);
     setFormData({ ...formData, photo: uploadedFile?.url });
   };
+
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
+    const { email, ...restData } = formData;
+    try {
+      const response = await fetch(`${BASE_URL}/doctors/${doctorData._id}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(restData),
+      });
+      const result = await response.json();
+      const { data } = result;
+      const {
+        password,
+        experiences,
+        nid,
+        bmdcRegNumber,
+        qualifications,
+        appointments,
+        ...rest
+      } = data;
+      localStorage.setItem("user", JSON.stringify({ ...rest }));
+
+      if (!response.ok) {
+        throw Error(result.message);
+      }
+      toast.success(result.message);
+
+      setFormData({
+        fullName: "",
+        email: "",
+        phone: "",
+        bio: "",
+        gender: "",
+        specialization: "",
+        ticketPrice: "",
+        nid: "",
+        bmdcRegNumber: "",
+        qualifications: [
+          { startDate: "", endDate: "", degree: "", university: "" },
+        ],
+        experiences: [
+          { startDate: "", endDate: "", position: "", hospital: "" },
+        ],
+        timeSlots: [{ day: "", startTime: "", endTime: "" }],
+        about: "",
+        photo: null,
+      });
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   //reuaable function for add new item
@@ -147,7 +221,7 @@ const Profile = () => {
             value={formData.email}
             placeholder="example@mail.com"
             onChange={handleUpdateFormInputchange}
-            readOnly
+            aria-readonly={true}
             disabled={true}
           />
         </div>

@@ -10,10 +10,8 @@ const corsOptions = {
     origin: true
 };
 // Access environment variables
-const mongodbUrl = process.env.MONGODB_URL;
 const baseUrl = process.env.BASE_URL;
 const port = process.env.PORT || 8000
-console.log(process.env.PORT)
 app.get("/", (req, res) => {
     res.send("Api is working")
 });
