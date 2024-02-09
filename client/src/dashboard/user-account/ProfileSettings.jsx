@@ -43,9 +43,6 @@ const ProfileSettings = ({ userData }) => {
     }
   };
 
-  console.log(selectedFile)
-
-
   const submitHandler = async (e) => {
     e.preventDefault();
     setLoading(true);

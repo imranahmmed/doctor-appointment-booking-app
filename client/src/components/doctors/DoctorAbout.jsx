@@ -1,113 +1,114 @@
 import React from "react";
 import { formateDate } from "../../utils/formateDate";
-const DoctorAbout = () => {
+import { Link } from "react-router-dom";
+const DoctorAbout = ({
+  fullName,
+  about,
+  experiences,
+  qualifications,
+  setTab,
+}) => {
   return (
-    <div>
-      <div>
-        <h3 className="text-[20px] leading-[30px] text-headingColor font-semibold flex items-center gap-2">
-          About of
-          About of{" "}
-          <span className="text-irisBlueColor font-bold text-[24px] leading-9">
-            Imran Ahammed
-          </span>
-        </h3>
-        <p className="text_para">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure magni
-          corrupti aut quos facilis ea nobis reprehenderit, distinctio pariatur
-          laudantium nulla esse, id nihil aliquid itaque aliquam tempore laborum
-          ullam, suscipit recusandae eos inventore. Doloribus voluptate sapiente
-          laboriosam sunt! Quo, ipsum rem quidem eaque ipsa error hic vel ut ea,
-          perferendis mollitia incidunt officia?
-        </p>
-      </div>
+    <div className="mt-[50px]">
+      {about ? (
+        <div>
+          <h3 className="text-[20px] leading-[30px] text-headingColor font-semibold flex items-center gap-2">
+            About of
+            <span className="text-irisBlueColor font-bold text-[24px] leading-9">
+              {fullName}
+            </span>
+          </h3>
+          <p className="text_para">{about}</p>
+        </div>
+      ) : (
+        <div className="flex p-4 text-yellow-800 bg-yellow-50 rounded-lg">
+          <h2>
+            To add your all the information,{" "}
+            <Link
+              href="#"
+              className="text-primaryColor"
+              onClick={() => setTab("profile")}
+            >
+              Click Here
+            </Link>
+          </h2>
+        </div>
+      )}
 
       <div className="mt-12">
         <h3 className="text-[20px] leading-[30px] text-headingColor font-semibold">
           Education
         </h3>
-        <ul className="pt-4 md:p-5">
-          <li className="flex flex-col sm:flex-row sm:justify-between sm:items-end md:gap-5 mb-[30px]">
-            <div>
-              <span className="text-irisBlueColor text-[15px] leading-6 font-semibold">
-                {formateDate("09-13-2014")} - {formateDate("09-13-2016")}
-              </span>
-              <p className="text-[16px] leading-6 font-medium text-textColor">
-                PHD in Surgeon
-              </p>
-            </div>
-            <p className="text-[14px] leading-5 font-medium text-textColor">
-              New Apollo Hospital, New York.
-            </p>
-          </li>
-          <li className="flex flex-col sm:flex-row sm:justify-between sm:items-end md:gap-5 mb-[30px]">
-            <div>
-              <span className="text-irisBlueColor text-[15px] leading-6 font-semibold">
-                {formateDate("11-04-2010")} - {formateDate("09-13-2014")}
-              </span>
-              <p className="text-[16px] leading-6 font-medium text-textColor">
-                PHD in Surgeon
-              </p>
-            </div>
-            <p className="text-[14px] leading-5 font-medium text-textColor">
-              New Apollo Hospital, New York.
-            </p>
-          </li>
-        </ul>
+        {qualifications?.length > 0 ? (
+          <ul className="pt-4 md:p-5 md:pb-0">
+            {qualifications?.map((item, index) => (
+              <li
+                key={index}
+                className="flex flex-col sm:flex-row sm:justify-between sm:items-end md:gap-5 mb-[30px] last:mb-0"
+              >
+                <div>
+                  <span className="text-irisBlueColor text-[15px] leading-6 font-semibold">
+                    {formateDate(item.startDate)} - {formateDate(item.endDate)}
+                  </span>
+                  <p className="text-[16px] leading-6 font-medium text-textColor">
+                    {item.degree}
+                  </p>
+                </div>
+                <p className="text-[14px] leading-5 font-medium text-textColor">
+                  {item.university}
+                </p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div className="flex p-4 text-yellow-800 bg-yellow-50 rounded-lg mt-2">
+            <h2>
+              To add your education,{" "}
+              <Link
+                href="#"
+                className="text-primaryColor"
+                onClick={() => setTab("profile")}
+              >
+                Click Here
+              </Link>
+            </h2>
+          </div>
+        )}
       </div>
-
       <div className="mt-12">
         <h3 className="text-[20px] leading-[30px] text-headingColor font-semibold">
           Experience
         </h3>
-        <ul className="grid sm:grid-cols-2 gap-[30px] pt-4 md:p-5">
-          <li className="p-4 rounded bg-[#fff9ea]">
-            <span className="text-yellowColor text-[15px] leading-6 font-semibold">
-              {formateDate("09-13-2014")} - {formateDate("09-13-2016")}
-            </span>
-            <p className="text-[16px] leading-6 font-medium text-textColor">
-              Sr.surgeon
-            </p>
-            <p className="text-[14px] leading-5 font-medium text-textColor">
-              New Apollo Hospital, New York.
-            </p>
-          </li>
-          <li className="p-4 rounded bg-[#fff9ea]">
-            <span className="text-yellowColor text-[15px] leading-6 font-semibold">
-              {formateDate("09-13-2014")} - {formateDate("09-13-2016")}
-            </span>
-            <p className="text-[16px] leading-6 font-medium text-textColor">
-              Sr.surgeon
-            </p>
-            <p className="text-[14px] leading-5 font-medium text-textColor">
-              New Apollo Hospital, New York.
-            </p>
-          </li>
-          <li className="p-4 rounded bg-[#fff9ea]">
-            <span className="text-yellowColor text-[15px] leading-6 font-semibold">
-              {formateDate("09-13-2014")} - {formateDate("09-13-2016")}
-            </span>
-            <p className="text-[16px] leading-6 font-medium text-textColor">
-              Sr.surgeon
-            </p>
-            <p className="text-[14px] leading-5 font-medium text-textColor">
-              New Apollo Hospital, New York.
-            </p>
-          </li>
-          <li className="p-4 rounded bg-[#fff9ea]">
-            <span className="text-yellowColor text-[15px] leading-6 font-semibold">
-              {formateDate("09-13-2014")} - {formateDate("09-13-2016")}
-            </span>
-            <p className="text-[16px] leading-6 font-medium text-textColor">
-              Sr.surgeon
-            </p>
-            <p className="text-[14px] leading-5 font-medium text-textColor">
-              New Apollo Hospital, New York.
-            </p>
-          </li>
-
-
-
-        </ul>
+        {experiences?.length > 0 ? (
+          <ul className="grid sm:grid-cols-2 gap-[30px] pt-4 md:p-5 md:pb-0">
+            {experiences?.map((item, index) => (
+              <li key={index} className="p-4 rounded bg-[#fff9ea]">
+                <span className="text-yellowColor text-[15px] leading-6 font-semibold">
+                  {formateDate(item.startDate)} - {formateDate(item.endDate)}
+                </span>
+                <p className="text-[16px] leading-6 font-medium text-textColor">
+                  {item.position}
+                </p>
+                <p className="text-[14px] leading-5 font-medium text-textColor">
+                  {item.hospital}
+                </p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div className="flex p-4 text-yellow-800 bg-yellow-50 rounded-lg mt-2">
+            <h2>
+              To add your experience,{" "}
+              <Link
+                href="#"
+                className="text-primaryColor"
+                onClick={() => setTab("profile")}
+              >
+                Click Here
+              </Link>
+            </h2>
+          </div>
+        )}
       </div>
     </div>
   );

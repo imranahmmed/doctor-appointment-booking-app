@@ -7,9 +7,9 @@ import pck from "number-generator";
 import nodemailer from "nodemailer";
 import { otpTemplate } from "../utils/emailTemplate.js";
 
-const generateToken = (user) => {
+const jwtTokenGenerate = (user) => {
     const { _id, role } = user
-    return jwt.sign({ id: _id, role: role }, process.env.JWT_SECRET_KEY, {
+    return jwt.sign({ id: _id, role: role }, process.env.JWT_SECRET, {
         expiresIn: "15d"
     })
 }
@@ -37,9 +37,6 @@ export const registrationController = async (req, res) => {
             } else if (role === "doctor") {
                 duplicateEmail = await Doctor.find({ email: email })
             }
-
-            // duplicateEmail = await Doctor.find({ email: email })
-            // duplicateEmail = await User.find({ email: email })
 
             if (duplicateEmail.length > 0) {
                 return res.status(403).json({ message: "User already exists. Please, Try another email" })
@@ -105,20 +102,19 @@ export const loginController = async (req, res) => {
         }
 
 
-        // check if user exists or not
+        // // check if user exists or not
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
 
         // if user exists, compare the provided password with the stored password
-        const isPassMatched = await bcrypt.compare(req.body.password, user.password);
+        const isPassMatched = bcrypt.compare(req.body.password, user.password);
 
         if (!isPassMatched) {
             return res.status(400).json({ message: "Password mismatch" });
         }
 
-        const token = generateToken(user);
-
+        const token = jwtTokenGenerate(user);
         const { password, role, appointments, ...rest } = user._doc;
         return res.status(200).json({ message: "Successfully Login", token, data: { ...rest }, role });
 
