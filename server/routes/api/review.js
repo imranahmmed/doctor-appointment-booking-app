@@ -5,6 +5,6 @@ const router = express.Router({ mergeParams: true })
 
 
 router.get('/', getAllReviews)
-router.post('/', authenticate, restrict(["patient", "doctor"]), postReview)
+router.post('/', authenticate, restrict(["patient"]), postReview)
 
 export default router
