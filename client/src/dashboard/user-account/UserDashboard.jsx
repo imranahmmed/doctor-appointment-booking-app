@@ -44,14 +44,10 @@ const UserDashboard = () => {
                 <p className="text-textColor text-[15px] leading-6 font-normal">
                   {userData.email}
                 </p>
-                {userData.bloodGroup && (
-                  <p className="text-textColor text-[15px] leading-6 font-normal">
-                    Blood Group :
-                    <span className="ml-2 text-headingColor font-medium">
-                      {userData.bloodGroup}
-                    </span>
-                  </p>
-                )}
+                <p className="text-textColor text-[15px] leading-6 font-normal">
+                  Blood Group :{" "}
+                  <span className="ml-2 text-headingColor font-medium">{userData.bloodGroup}</span>{" "}
+                </p>
               </div>
 
               <div className="mt-[50px] md:mt-[100px] flex flex-col gap-3">
@@ -89,9 +85,7 @@ const UserDashboard = () => {
                 </button>
               </div>
               {tab === "appointments" && <MyAppointments />}
-              {tab === "profileSetting" && (
-                <ProfileSettings userData={userData} />
-              )}
+              {tab === "profileSetting" && <ProfileSettings userData={userData} />}
             </div>
           </div>
         )}

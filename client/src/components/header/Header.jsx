@@ -94,9 +94,7 @@ const Header = () => {
                     />
                   </figure>
                   <div>
-                    <h2 className="text-bold text-lg text-headingColor">
-                      {user?.fullName}
-                    </h2>
+                    <h2 className="text-bold text-lg text-headingColor">{user?.fullName}</h2>
                     <p className="para capitalize text-normal text-sm text-gray-500">
                       {role}
                     </p>

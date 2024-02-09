@@ -47,7 +47,7 @@ const ProfileSettings = ({ userData }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch(`${BASE_URL}/users/${userData._id}`, {
+      const response = await fetch(`${BASE_URL}/users/${userData._id}`, {
         method: "put",
         headers: {
           "Content-Type": "application/json",
@@ -55,16 +55,14 @@ const ProfileSettings = ({ userData }) => {
         },
         body: JSON.stringify(formData),
       });
-      const { message, data } = await res.json();
-      if (!res.ok) {
+
+      const { message } = await response.json();
+      if (!response.ok) {
         throw new Error(message);
       }
-      console.log(data)
-      const {appointments, ...rest} = data
-      localStorage.setItem("user", JSON.stringify({...rest}));
       setLoading(false);
       toast.success(message);
-
+      navigate("/users/profile/me");
     } catch (error) {
       toast.error(error.message);
       setLoading(false);
