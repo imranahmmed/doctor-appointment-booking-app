@@ -1,12 +1,44 @@
 import React, { useState } from "react";
 import { AiFillStar } from "react-icons/ai";
+import { useParams } from "react-router-dom";
+import { BASE_URL, token } from "../../config";
+import HashLoader from "react-spinners/HashLoader";
+import Error from "../error/Error";
+import { toast } from "react-toastify";
+
 const DoctorFeedbackForm = () => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [reviewText, setReviewText] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { id } = useParams();
+
   const handleSubmitReview = async (e) => {
-    e.preventDefault()
-  }
+    e.preventDefault();
+    setLoading(true);
+    if (!rating || !reviewText) {
+      setLoading(false);
+      toast.error("Please select rating star and write your experince.");
+    } else {
+      const response = await fetch(`${BASE_URL}/doctors/${id}/reviews`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json ",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ rating, reviewText }),
+      });
+      const result = await response.json();
+
+      if (!response.ok) {
+        toast.error(result.message);
+        setLoading(false);
+      } else {
+        setLoading(false);
+        toast.success(result.message);
+      }
+    }
+  };
   return (
     <form action="">
       <div>
@@ -54,7 +86,9 @@ const DoctorFeedbackForm = () => {
           onChange={(e) => setReviewText(e.target.value)}
         ></textarea>
       </div>
-      <button className="btn" type="submit" onClick={handleSubmitReview}>Share Feedback</button>
+      <button className="btn" type="submit" onClick={handleSubmitReview}>
+        {loading ? <HashLoader size={22} color="#ffffff" /> : "Share Feedback"}
+      </button>
     </form>
   );
 };
