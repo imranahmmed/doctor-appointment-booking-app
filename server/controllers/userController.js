@@ -87,11 +87,12 @@ export const myAppointments = async (req, res) => {
     try {
         // retrieve Appointments from booking
         const appointments = await Booking.find({ user: req.userId })
+
         // extract doctor ids from appointments
-        const doctorIds = appointments.map((el) => el.doctor.id)
-        // retrive doctors using doctors id
-        const doctors = await Doctor.find({ _id: { $in: doctorIds } }).select("-password")
-        res.status(200).json({ success: true, message: "Appointments found", data: doctors })
+        // const doctorIds = appointments.map((el) => el.doctor.id)
+        // // retrive doctors using doctors id
+        // const doctors = await Doctor.find({ _id: { $in: doctorIds } }).select("-password")
+        res.status(200).json({ success: true, message: "Appointments found", data: appointments })
     } catch (error) {
         return res.status(500).json({ success: false, message: "Something went wrong" })
     }
