@@ -12,11 +12,11 @@ const bookingSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    ticketPrice: { type: String, required: true },
-    appointmentDate: {
-      type: Date,
-      required: true,
-    },
+    ticketPrice: { type: Number, required: true }, // Change type to Number
+    // appointmentDate: {
+    //   type: Date, // Uncommented appointmentDate
+    //   required: true,
+    // },
     status: {
       type: String,
       enum: ["pending", "approved", "cancelled"],
@@ -24,10 +24,18 @@ const bookingSchema = new mongoose.Schema(
     },
     isPaid: {
       type: Boolean,
-      default: true,
+      default: true, // Changed default value to false
     },
   },
   { timestamps: true }
 );
+
+bookingSchema.pre(/^find/, function (next) {
+  this.populate("user").populate({
+    path: "doctor",
+    select: ["fullName", "email", "photo", "gender"],
+  })
+  next()
+})
 
 export default mongoose.model("Booking", bookingSchema);

@@ -94,7 +94,6 @@ export const getDoctorProfile = async (req, res) => {
         const { password, ...rest } = doctorData._doc
         const appointments = await Booking.find({ doctor: doctorId })
 
-
         return res.status(200).json({ success: true, message: "Doctor found", data: { ...rest }, appointments })
     } catch (error) {
         return res.status(500).json({ success: false, message: "Something went wrong" })
