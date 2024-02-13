@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Loader from "../../components/loader/Loading";
+import Loading from "../../components/loader/Loading";
 import Error from "../../components/error/Error";
 import useGetProfile from "../../hooks/useFetchData";
 import { BASE_URL } from "../../config";
@@ -11,15 +11,16 @@ import Profile from "./Profile";
 import Appointments from "./Appointments";
 
 const DoctorDashboard = () => {
-  const { data, loading, error } = useGetProfile(
+  const { data, appointments, loading, error } = useGetProfile(
     `${BASE_URL}/doctors/profile/me`
   );
+
   const [tab, setTab] = useState("overview");
   const { about, fullName, experiences, qualifications } = data;
   return (
     <section>
       <div className="max-w-[1170px] px-5 mx-auto">
-        {loading && !error && <Loader />}
+        {loading && !error && <Loading />}
         {!loading && error && <Error errorMessage={error} />}
         {!loading && !error && (
           <div className="grid lg:grid-cols-3 gap-[30px] lg:gap-[50px]">
@@ -86,7 +87,7 @@ const DoctorDashboard = () => {
                   </div>
                 )}
                 {tab === "appointments" && (
-                  <Appointments appointments={data?.appointments} />
+                  <Appointments appointments={appointments && appointments} />
                 )}
                 {tab === "profile" && <Profile doctorData={data} />}
               </div>

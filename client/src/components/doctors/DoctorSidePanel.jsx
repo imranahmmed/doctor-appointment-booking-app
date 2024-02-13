@@ -1,9 +1,38 @@
-import React from "react";
+import React, { useContext } from "react";
 import { formateTime } from "../../utils/formateTime";
+import { BASE_URL, token } from "../../config.js";
+import { toast } from "react-toastify";
+import { authContext } from "../../context/AuthContext.jsx";
+import { Link } from "react-router-dom";
+
 const DoctorSidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
-  console.log("doctorId", doctorId);
-  console.log("ticketPrice", ticketPrice);
-  console.log("timeSlots", timeSlots);
+  const { token, role, user } = useContext(authContext);
+
+  const handleBooking = async () => {
+    try {
+      const res = await fetch(
+        `${BASE_URL}/bookings/checkout-session/${doctorId}`,
+        {
+          method: "post",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message + " Please try again");
+      }
+
+      if (data.session.url) {
+        window.location.href = data.session.url;
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
 
   return (
     <div className="shadow-panelShadow p-3 lg:p-5 rounded-md">
@@ -31,7 +60,16 @@ const DoctorSidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
           ))}
         </ul>
       </div>
-      <button className="btn rounded-md w-full px-2">Book Appointment</button>
+
+      {role === "patient" ? (
+        <button onClick={handleBooking} className="btn rounded-md w-full px-2">
+          Book Appointment
+        </button>
+      ) : (
+        <Link to={`/doctors/profile/me`} className="btn rounded-md w-full px-2 block text-center">
+          Edit Timeslots
+        </Link>
+      )}
     </div>
   );
 };
