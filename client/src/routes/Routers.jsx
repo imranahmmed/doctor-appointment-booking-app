@@ -10,18 +10,21 @@ import UserDashboard from "../dashboard/user-account/UserDashboard";
 import DoctorDashboard from "../dashboard/doctor-account/DoctorDashboard";
 import RouteProtector from "./RouteProtector";
 import { Routes, Route } from "react-router-dom";
+import SuccessCheckout from "../pages/payments/SuccessCheckout";
+
 const Routers = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home />}></Route>
-      <Route path="*" element={<Error404 />}></Route>
-      <Route path="/home" element={<Home />}></Route>
-      <Route path="/login" element={<Login />}></Route>
-      <Route path="/register" element={<Registration />}></Route>
-      <Route path="/services" element={<Services />}></Route>
-      <Route path="/contact" element={<Contact />}></Route>
-      <Route path="/doctors" element={<Doctors />}></Route>
-      <Route path="/doctors/:id" element={<DoctorDetails />}></Route>
+      <Route path="/" element={<Home />} />
+      <Route path="*" element={<Error404 />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Registration />} />
+      <Route path="/services" element={<Services />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/doctors" element={<Doctors />} />
+      <Route path="/doctors/:id" element={<DoctorDetails />} />
+      <Route path="/success-checkout" element={<SuccessCheckout />} />
       {/* <Route
         path="/users/profile/me"
         element={

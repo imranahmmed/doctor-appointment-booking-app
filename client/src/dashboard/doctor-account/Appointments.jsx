@@ -43,7 +43,7 @@ const Appointments = ({ appointments }) => {
                 </div>
               </th>
 
-              <td className="px-6 py-3">{item.user.gender}</td>
+              <td className="px-6 py-3 capitalize">{item.user.gender}</td>
               <td className="px-6 py-3">
                 {item.isPaid && (
                   <div className="flex items-center">
@@ -58,7 +58,7 @@ const Appointments = ({ appointments }) => {
                   </div>
                 )}
               </td>
-              <td className="px-6 py-3">{item.ticketPrice}</td>
+              <td className="px-6 py-3">{item.ticketPrice} Tk</td>
               <td className="px-6 py-3">{formateDate(item.createdAt)}</td>
             </tr>
           ))}

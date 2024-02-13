@@ -3,6 +3,7 @@ import { token } from "../config";
 
 const useFetchData = (url) => {
   const [data, setData] = useState([]);
+  const [appointments, setappointments] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   useEffect(() => {
@@ -17,8 +18,8 @@ const useFetchData = (url) => {
         if (!response.ok) {
           throw new Error(result.message);
         }
-
         setData(result.data);
+        setappointments(result.appointments);
         setLoading(false);
         setError(null);
       } catch (error) {
@@ -31,6 +32,7 @@ const useFetchData = (url) => {
   }, [url]);
   return {
     data,
+    appointments,
     loading,
     error,
   };
