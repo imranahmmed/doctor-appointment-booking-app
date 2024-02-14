@@ -9,15 +9,17 @@ The frontend of the application is built using React.js and handles the user int
 - **React.js**: Frontend library for building user interfaces.
 - **Tailwind CSS and JavaScript**: Used for structuring, styling, and scripting the frontend.
 - **React Router**: For routing within the React application.
+- **Context API **: Used for state management.
 - **Fetch**: For making HTTP requests to the backend server.
+- **Stripe**: Used for payment gateway.
 
 ### Setup Instructions
 1. Navigate to the `client` directory: 
-cd client
+- **cd client**
 2. Install dependencies:
-npm install
+- **npm install**
 3. Start the development server:
-npm run dev
+- **npm run dev**
 4. Open your web browser and navigate to `http://localhost:5173` to view the application.
 
 ## Backend
@@ -31,20 +33,18 @@ The backend of the application is built using Node.js, Express.js, and MongoDB. 
 
 ### Setup Instructions
 1. Navigate to the `server` directory:
-   - cd server
+   - **cd server**
 2. Install dependencies:
-   - npm install
+   - **npm install**
 3. Set up environment variables:
    - Create a `.env` file in the root directory.
    - Define the following environment variables:
-     PORT=3001
-     MONGODB_URI=<your-mongodb-uri>
-     JWT_SECRET=<your-jwt-secret>
-     STRIPE_SECRET_KEY=<your-stripe-secret-key>
+     - PORT=3001
+     - MONGODB_URI=<your-mongodb-uri>
+     - JWT_SECRET=<your-jwt-secret>
+     - STRIPE_SECRET_KEY=<your-stripe-secret-key>
 4. Start the server:
-   - npm start
-
-
+   - **npm start**
 
 ## Deployment
 The frontend and backend can be deployed separately to their respective hosting platforms. Ensure that environment variables are properly configured in your deployment environment.
