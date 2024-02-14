@@ -7,7 +7,7 @@ The frontend of the application is built using React.js and handles the user int
 
 ### Technologies Used
 - **React.js**: Frontend library for building user interfaces.
-- **HTML, CSS, JavaScript**: Languages used for structuring, styling, and scripting the frontend.
+- **Tailwind CSS and JavaScript**: Used for structuring, styling, and scripting the frontend.
 - **React Router**: For routing within the React application.
 - **Fetch**: For making HTTP requests to the backend server.
 
