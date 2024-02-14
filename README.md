@@ -1,50 +1,33 @@
-# Doctor Appointment Booking Application
 
+# Doctor Appointment Booking Application
 This is a web application designed to facilitate booking appointments with doctors online. It provides a convenient platform for users to browse available doctors, schedule appointments, and manage their bookings.
 
-## Frontend
-The frontend of the application is built using React.js and handles the user interface and interactions.
+## Features
+- **User Authentication**: Users can sign up for an account, log in, and manage their profile.
+- **Doctor Listings**: Users can browse a list of available doctors, view their profiles, and see their availability for appointments.
+- **Appointment Booking**: Users can schedule appointments with doctors based on their availability.
+- **Booking Management**: Users can view and manage their upcoming appointments, including canceling or rescheduling appointments.
+- **Stripe Integration**: Secure payment processing through Stripe for appointment bookings.
+- **Admin Dashboard**: Admin users can manage doctors, appointments, and user accounts.
 
-### Technologies Used
-- **React.js**: Frontend library for building user interfaces.
-- **Tailwind CSS and JavaScript**: Used for structuring, styling, and scripting the frontend.
-- **React Router**: For routing within the React application.
-- **Context API **: Used for state management.
-- **Fetch**: For making HTTP requests to the backend server.
-- **Stripe**: Used for payment gateway.
+## Technologies Used
+- **Frontend**: Tailwind CSS, JavaScript, React.js
+- **Backend**: Node.js, Express.js, MongoDB
+- **Authentication**: JSON Web Tokens (JWT)
+- **Database**: MongoDB Atlas
+- **Payment Processing**: Stripe API
+- **Deployment**: Render (Backend), Netlify (Frontend)
 
-### Setup Instructions
-1. Navigate to the `client` directory: 
-- **cd client**
-2. Install dependencies:
-- **npm install**
-3. Start the development server:
-- **npm run dev**
-4. Open your web browser and navigate to `http://localhost:5173` to view the application.
-
-## Backend
-The backend of the application is built using Node.js, Express.js, and MongoDB. It handles data storage, business logic, and API endpoints.
-
-### Technologies Used
-- **Node.js**: JavaScript runtime environment for running server-side code.
-- **Express.js**: Web application framework for Node.js used for building APIs.
-- **MongoDB**: NoSQL database for storing application data.
-- **Mongoose**: MongoDB object modeling tool for Node.js.
-
-### Setup Instructions
-1. Navigate to the `server` directory:
-   - **cd server**
-2. Install dependencies:
-   - **npm install**
+## Setup Instructions
+1. Clone the repository: **git clone <repository-url>**
+2. Install dependencies in both server and client folder: **cd <project-folder>** **npm install**
 3. Set up environment variables:
    - Create a `.env` file in the root directory.
    - Define the following environment variables:
-     - PORT=3001
-     - MONGODB_URI=<your-mongodb-uri>
-     - JWT_SECRET=<your-jwt-secret>
-     - STRIPE_SECRET_KEY=<your-stripe-secret-key>
-4. Start the server:
-   - **npm start**
+      - PORT=3000
+      - MONGODB_URI=<your-mongodb-uri>
+      - JWT_SECRET=<your-jwt-secret>
+      - STRIPE_SECRET_KEY=<your-stripe-secret-key>
 
 ## Deployment
 The frontend and backend can be deployed separately to their respective hosting platforms. Ensure that environment variables are properly configured in your deployment environment.
