@@ -5,7 +5,7 @@ import useGetProfile from "../../hooks/useFetchData";
 import { BASE_URL } from "../../config";
 import Tabs from "./Tabs";
 import { LuInfo } from "react-icons/lu";
-import starIcon from "../../assets/images/Star.png";
+import starIcon from "../../assets/images/star.png";
 import DoctorAbout from "../../components/doctors/DoctorAbout";
 import Profile from "./Profile";
 import Appointments from "./Appointments";
