@@ -35,8 +35,5 @@ The frontend and backend can be deployed separately to their respective hosting 
 ## Contributing
 Contributions are welcome! If you find any bugs or have suggestions for improvements, please open an issue or create a pull request.
 
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## Authors
 - Imran Ahammed (https://github.com/imranahmmed)
