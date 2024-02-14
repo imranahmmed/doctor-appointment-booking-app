@@ -8,15 +8,10 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-<<<<<<< HEAD
-client/src/assets/images/psds/doctors.psd
-=======
->>>>>>> dba6e1c556385e28dde3f9ee7bc456e5bceb5c15
 .env
 dist
 dist-ssr
 *.local
-
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
