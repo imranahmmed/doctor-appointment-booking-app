@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import starIcon from "../../assets/images/star.png";
-import DoctorAbout from "../../components/doctors/DoctorAbout.jsx";
-import DoctorFeedback from "../../components/doctors/DoctorFeedback.jsx";
-import DoctorSidePanel from "../../components/doctors/DoctorSidepanel.jsx";
+import DoctorAbout from "../../components/doctors/DoctorAbout";
+import DoctorFeedback from "../../components/doctors/DoctorFeedback";
+import DoctorSidePanel from "../../components/doctors/DoctorSidePanel";
 import { BASE_URL } from "../../config";
 import Loading from "../../components/loader/Loading";
 import Error from "../../components/error/Error";
