@@ -20,7 +20,7 @@ This is a web application designed to facilitate booking appointments with docto
 
 ## Setup Instructions
 1. Clone the repository: **git clone <repository-url>**
-2. Install dependencies in both server and client folder: **cd <project-folder>** **npm install**
+2. Install dependencies in both server and client folder: **cd client / cd server** > **npm install**
 3. Set up environment variables:
    - Create a `.env` file in the root directory.
    - Define the following environment variables:
