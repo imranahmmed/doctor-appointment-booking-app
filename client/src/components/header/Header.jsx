@@ -13,6 +13,10 @@ const navLinks = [
     name: "Find a Doctor",
   },
   {
+    path: "/clinics",
+    name: "Nearby Clinic",
+  },
+  {
     path: "/services",
     name: "Services",
   },
@@ -80,9 +84,7 @@ const Header = () => {
               <div>
                 <Link
                   to={`${
-                    role === "doctor"
-                      ? `/doctors/profile/me`
-                      : `/users/profile/me`
+                    role === "doctor" ? `/doctors/profile/me` : role === "clinic" ? `/clinics/profile/me` : `/users/profile/me`
                   }`}
                   className="flex gap-3 items-center"
                 >
@@ -94,7 +96,7 @@ const Header = () => {
                     />
                   </figure>
                   <div>
-                    <h2 className="text-bold text-lg text-headingColor">{user?.fullName}</h2>
+                    <h2 className="text-bold text-lg text-headingColor">{user?.clinicName}</h2>
                     <p className="para capitalize text-normal text-sm text-gray-500">
                       {role}
                     </p>

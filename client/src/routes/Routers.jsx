@@ -11,6 +11,8 @@ import DoctorDashboard from "../dashboard/doctor-account/DoctorDashboard";
 import RouteProtector from "./RouteProtector";
 import { Routes, Route } from "react-router-dom";
 import SuccessCheckout from "../pages/payments/SuccessCheckout";
+import Clinics from "../pages/clinics/Clinics";
+import ClinicDashboard from "../dashboard/clinic-account/ClinicDashboard";
 
 const Routers = () => {
   return (
@@ -25,6 +27,7 @@ const Routers = () => {
       <Route path="/doctors" element={<Doctors />} />
       <Route path="/doctors/:id" element={<DoctorDetails />} />
       <Route path="/success-checkout" element={<SuccessCheckout />} />
+      <Route path="/clinics" element={<Clinics />} />
       {/* <Route
         path="/users/profile/me"
         element={
@@ -57,6 +60,15 @@ const Routers = () => {
           <RouteProtector
             element={<DoctorDashboard />}
             allowedRoles={["doctor"]}
+          />
+        }
+      />
+      <Route
+        path="/clinics/profile/me"
+        element={
+          <RouteProtector
+            element={<ClinicDashboard />}
+            allowedRoles={["clinic"]}
           />
         }
       />

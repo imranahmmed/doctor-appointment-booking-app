@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import DoctorCard from "../../components/doctors/DoctorCard";
 import Testimonial from "../../components/testimonial/Testimonial";
-
 import { BASE_URL } from "../../config";
 import useFetchData from "../../hooks/useFetchData";
 import Loading from "../../components/loader/Loading";
