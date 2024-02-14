@@ -3,11 +3,11 @@ import { formateTime } from "../../utils/formateTime";
 import { BASE_URL, token } from "../../config.js";
 import { toast } from "react-toastify";
 import { authContext } from "../../context/AuthContext.jsx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const DoctorSidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
   const { token, role, user } = useContext(authContext);
-
+  const navigate = useNavigate();
   const handleBooking = async () => {
     try {
       const res = await fetch(
@@ -23,14 +23,19 @@ const DoctorSidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.message + " Please try again");
+        throw new Error(data.message);
       }
 
       if (data.session.url) {
         window.location.href = data.session.url;
       }
     } catch (error) {
-      toast.error(error.message);
+      if (error.message === "Invalid Token") {
+        toast.error(
+          "You can't book appointment without login, Please Login First"
+        );
+        navigate("/login");
+      }
     }
   };
 
@@ -42,7 +47,6 @@ const DoctorSidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
           {ticketPrice} BDT
         </span>
       </div>
-
       <div className="mt-[30px]">
         <p className="text_para mt-0 font-semibold text-headingColor">
           Available Time Slots:
@@ -60,13 +64,15 @@ const DoctorSidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
           ))}
         </ul>
       </div>
-
-      {role === "patient" ? (
+      {role === "patient" || role === "null" ? (
         <button onClick={handleBooking} className="btn rounded-md w-full px-2">
           Book Appointment
         </button>
       ) : (
-        <Link to={`/doctors/profile/me`} className="btn rounded-md w-full px-2 block text-center">
+        <Link
+          to={`/doctors/profile/me`}
+          className="btn rounded-md w-full px-2 block text-center"
+        >
           Edit Timeslots
         </Link>
       )}
