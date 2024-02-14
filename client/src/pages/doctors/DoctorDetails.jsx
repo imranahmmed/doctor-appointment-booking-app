@@ -21,21 +21,6 @@ const DoctorDetails = () => {
 
   const currentDoctor = doctor && doctor.length > 0 ? doctor[0] : null;
 
-  // const {
-  //   fullName,
-  //   photo,
-  //   specialization,
-  //   qualifications,
-  //   experiences,
-  //   timeSlots,
-  //   reviews,
-  //   bio,
-  //   about,
-  //   averageRating,
-  //   totalRating,
-  //   totalPatients,
-  //   ticketPrice,
-  // } = currentDoctor;
   return (
     <section>
       <div className="max-w-[1170px] px-5 mx-auto">
